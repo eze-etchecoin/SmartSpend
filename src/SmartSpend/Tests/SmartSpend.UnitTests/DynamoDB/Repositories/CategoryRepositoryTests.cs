@@ -9,7 +9,7 @@ namespace SmartSpend.UnitTests.DynamoDB.Repositories
 
         public CategoryRepositoryTests()
         {
-            _repo = new CategoryRepository(DynamoDBContext);
+            _repo = new CategoryRepository(DbContext);
         }
 
         [Fact]

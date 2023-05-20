@@ -1,5 +1,5 @@
 ﻿using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.DataModel;
+using SmartSpend.Persistence.DynamoDb;
 
 namespace SmartSpend.Server.Configuration
 {
@@ -13,7 +13,7 @@ namespace SmartSpend.Server.Configuration
             services.AddSingleton(sp =>
                 new AmazonDynamoDBClient(publicKey, privateKey, Amazon.RegionEndpoint.USEast1));
 
-            services.AddSingleton<DynamoDBContext>();
+            services.AddSingleton<SmartSpendDbContext>();
         }
     }
 }

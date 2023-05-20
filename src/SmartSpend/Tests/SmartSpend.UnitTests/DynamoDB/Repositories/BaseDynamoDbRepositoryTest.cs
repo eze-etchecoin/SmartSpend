@@ -1,15 +1,15 @@
 ﻿using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.DataModel;
+using SmartSpend.Persistence.DynamoDb;
 
 namespace SmartSpend.UnitTests.DynamoDB.Repositories
 {
     public class BaseDynamoDbRepositoryTest
     {
-        protected readonly DynamoDBContext DynamoDBContext;
+        protected readonly SmartSpendDbContext DbContext;
 
         public BaseDynamoDbRepositoryTest()
         {
-            DynamoDBContext = new DynamoDBContext(
+            DbContext = new SmartSpendDbContext(
                 new AmazonDynamoDBClient(
                     Environment.GetEnvironmentVariable("SMARTSPEND_DATAACCESS_PUBLICKEY"),
                     Environment.GetEnvironmentVariable("SMARTSPEND_DATAACCESS_PRIVATEKEY"),

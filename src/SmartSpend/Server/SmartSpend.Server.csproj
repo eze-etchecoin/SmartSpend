@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Client\SmartSpend.Client.csproj" />
+    <ProjectReference Include="..\Persistence\SmartSpend.Persistence.DynamoDb\SmartSpend.Persistence.DynamoDb.csproj" />
     <ProjectReference Include="..\Shared\SmartSpend.Shared.csproj" />
   </ItemGroup>
 
