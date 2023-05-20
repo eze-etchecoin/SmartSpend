@@ -3,13 +3,13 @@ using SmartSpend.Persistence.DynamoDb.Repositories;
 
 namespace SmartSpend.UnitTests.DynamoDB.Repositories
 {
-    public class CategoryRepositoryTests
+    public class CategoryRepositoryTests : BaseDynamoDbRepositoryTest
     {
         private readonly CategoryRepository _repo;
 
         public CategoryRepositoryTests()
         {
-            _repo = new CategoryRepository(null);
+            _repo = new CategoryRepository(DynamoDBContext);
         }
 
         [Fact]
