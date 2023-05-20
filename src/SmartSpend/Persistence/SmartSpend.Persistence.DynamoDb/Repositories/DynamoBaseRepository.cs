@@ -1,5 +1,4 @@
-﻿using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.DataModel;
+﻿using Amazon.DynamoDBv2.DataModel;
 using AutoMapper;
 using SmartSpend.Domain.Core.Entities;
 using SmartSpend.Domain.Core.Repository;
@@ -12,34 +11,33 @@ namespace SmartSpend.Persistence.DynamoDb.Repositories
         where TDynamoEntity : DynamoBaseEntity
     {
         protected readonly IMapper Mapper;
-        private readonly AmazonDynamoDBClient _client;
         private readonly DynamoDBContext _context;
 
-        public DynamoBaseRepository()
+        public DynamoBaseRepository(DynamoDBContext context)
         {
-            _client = new AmazonDynamoDBClient();
-            _context = new DynamoDBContext(_client);
+            _context = context;
+
             ConfigAutoMapper(out Mapper);
         }
 
         protected abstract void ConfigAutoMapper(out IMapper mapper);
 
-        public void Add(TEntity entity)
+        public async Task Insert(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(TEntity entity)
+        public async Task Delete(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public void GetAll()
+        public async Task<IEnumerable<TEntity>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public void Update(TEntity entity)
+        public async Task Update(TEntity entity)
         {
             throw new NotImplementedException();
         }

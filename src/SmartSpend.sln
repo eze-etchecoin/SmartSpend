@@ -11,15 +11,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartSpend.Shared", "SmartS
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{2C069A63-44F3-4105-9CBE-C6E1E8D7024B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSpend.Domain.Model", "SmartSpend\Domain\SmartSpend.Domain.Model\SmartSpend.Domain.Model.csproj", "{A09394A6-FDCF-4BD7-8649-149B2130EA30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartSpend.Domain.Model", "SmartSpend\Domain\SmartSpend.Domain.Model\SmartSpend.Domain.Model.csproj", "{A09394A6-FDCF-4BD7-8649-149B2130EA30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSpend.Domain.Core", "SmartSpend\Domain\SmartSpend.Domain.Core\SmartSpend.Domain.Core.csproj", "{CA4C476F-3307-4206-9889-74AF7831980B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartSpend.Domain.Core", "SmartSpend\Domain\SmartSpend.Domain.Core\SmartSpend.Domain.Core.csproj", "{CA4C476F-3307-4206-9889-74AF7831980B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{885C673A-731E-4957-B336-AF5FEDBFE9B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSpend.Persistence.DynamoDb", "SmartSpend\Persistence\SmartSpend.Persistence.DynamoDb\SmartSpend.Persistence.DynamoDb.csproj", "{FDD42E22-ACA0-424A-AF88-889E0DBF0295}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartSpend.Persistence.DynamoDb", "SmartSpend\Persistence\SmartSpend.Persistence.DynamoDb\SmartSpend.Persistence.DynamoDb.csproj", "{FDD42E22-ACA0-424A-AF88-889E0DBF0295}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSpend.Domain.Services", "SmartSpend\Domain\SmartSpend.Domain.Services\SmartSpend.Domain.Services.csproj", "{5D1B4F50-7F67-4D95-9179-2F535FEF46F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartSpend.Domain.Services", "SmartSpend\Domain\SmartSpend.Domain.Services\SmartSpend.Domain.Services.csproj", "{5D1B4F50-7F67-4D95-9179-2F535FEF46F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C1605E65-0FB4-4665-8868-BDF68B0224EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSpend.UnitTests", "SmartSpend\Tests\SmartSpend.UnitTests\SmartSpend.UnitTests.csproj", "{D3B7477B-9EAD-45ED-BCDC-8CE991D8C47F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +59,10 @@ Global
 		{5D1B4F50-7F67-4D95-9179-2F535FEF46F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D1B4F50-7F67-4D95-9179-2F535FEF46F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D1B4F50-7F67-4D95-9179-2F535FEF46F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3B7477B-9EAD-45ED-BCDC-8CE991D8C47F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3B7477B-9EAD-45ED-BCDC-8CE991D8C47F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3B7477B-9EAD-45ED-BCDC-8CE991D8C47F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3B7477B-9EAD-45ED-BCDC-8CE991D8C47F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +72,7 @@ Global
 		{CA4C476F-3307-4206-9889-74AF7831980B} = {2C069A63-44F3-4105-9CBE-C6E1E8D7024B}
 		{FDD42E22-ACA0-424A-AF88-889E0DBF0295} = {885C673A-731E-4957-B336-AF5FEDBFE9B2}
 		{5D1B4F50-7F67-4D95-9179-2F535FEF46F3} = {2C069A63-44F3-4105-9CBE-C6E1E8D7024B}
+		{D3B7477B-9EAD-45ED-BCDC-8CE991D8C47F} = {C1605E65-0FB4-4665-8868-BDF68B0224EC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B58468FB-C9F0-4F35-ACCE-032E0F639C69}

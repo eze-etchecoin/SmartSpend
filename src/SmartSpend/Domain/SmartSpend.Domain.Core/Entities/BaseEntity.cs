@@ -2,12 +2,13 @@
 {
     public abstract class BaseEntity : ICreatedOn
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public DateTimeOffset CreatedOn { get; }
 
         public BaseEntity()
         {
+            Id = Guid.NewGuid();
             CreatedOn = DateTimeOffset.Now;
         }
 

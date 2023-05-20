@@ -1,13 +1,17 @@
-﻿using AutoMapper;
+﻿using Amazon.DynamoDBv2.DataModel;
+using AutoMapper;
 using SmartSpend.Domain.Services.EntitiesRepositories;
 using SmartSpend.Persistence.DynamoDb.Entities;
 
 namespace SmartSpend.Persistence.DynamoDb.Repositories
 {
-    internal class CategoryRepository : DynamoBaseRepository<Category, Domain.Model.Category>, ICategoryRepository
+    public class CategoryRepository : DynamoBaseRepository<Category, Domain.Model.Category>, ICategoryRepository
     {
-        
-        
+        public CategoryRepository(DynamoDBContext context) : base(context)
+        {
+            
+        }
+
         protected override void ConfigAutoMapper(out IMapper mapper)
         {
             mapper = new MapperConfiguration(cfg =>
