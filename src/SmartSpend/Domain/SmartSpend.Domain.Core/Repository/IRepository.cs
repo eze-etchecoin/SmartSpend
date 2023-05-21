@@ -8,5 +8,6 @@ namespace SmartSpend.Domain.Core.Repository
         Task Update(T entity);
         Task Delete(T entity);
         Task<IEnumerable<T>> GetAll();
+        Task<T> GetById(Guid id);
     }
 }

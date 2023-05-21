@@ -2,17 +2,16 @@
 
 namespace SmartSpend.Persistence.DynamoDb.Entities
 {
+    [DynamoDBTable("SmartSpend_Data")]
     public abstract class DynamoBaseEntity
     {
         private string _globalIdentifier;
         private string _id;
 
-        //private string _createdOn;
-
         public DynamoBaseEntity()
         {
             Id = Guid.NewGuid();
-            CreatedOn = DateTimeOffset.Now;
+            CreatedOn = DateTimeOffset.Now.ToString("u");
         }
 
         protected abstract string EntityName { get; }
@@ -24,8 +23,7 @@ namespace SmartSpend.Persistence.DynamoDb.Entities
             set => _globalIdentifier = $"{EntityName}#{Id}";
         }
 
-        [DynamoDBRangeKey]
-        public DateTimeOffset CreatedOn { get; set; }
+        public string CreatedOn { get; internal set; }
 
         public Guid Id 
         { 

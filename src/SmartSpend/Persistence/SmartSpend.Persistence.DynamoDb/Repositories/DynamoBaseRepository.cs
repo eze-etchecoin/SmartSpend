@@ -1,4 +1,5 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2.DocumentModel;
 using AutoMapper;
 using SmartSpend.Domain.Core.Entities;
 using SmartSpend.Domain.Core.Repository;
@@ -12,6 +13,7 @@ namespace SmartSpend.Persistence.DynamoDb.Repositories
     {
         protected readonly IMapper Mapper;
         private readonly DynamoDBContext _context;
+        //private const string _tableName = "SmartSpend_Data";
 
         public DynamoBaseRepository(DynamoDBContext context)
         {
@@ -24,12 +26,14 @@ namespace SmartSpend.Persistence.DynamoDb.Repositories
 
         public async Task Insert(TEntity entity)
         {
-            throw new NotImplementedException();
+            var dynamoEntity = Mapper.Map<TDynamoEntity>(entity);
+            await _context.SaveAsync(dynamoEntity);
         }
 
         public async Task Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            var dynamoEntity = Mapper.Map<TDynamoEntity>(entity);
+            await _context.DeleteAsync(dynamoEntity.GlobalIdentifier);
         }
 
         public async Task<IEnumerable<TEntity>> GetAll()
@@ -39,7 +43,21 @@ namespace SmartSpend.Persistence.DynamoDb.Repositories
 
         public async Task Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            var dynamoEntity = Mapper.Map<TDynamoEntity>(entity);
+            await _context.SaveAsync(dynamoEntity);
         }
+
+        public async Task<TEntity> GetById(Guid id)
+        {
+            var hashKey = GetGlobalIdentifierFromGuidId(id);
+            var result = (await _context
+                .QueryAsync<TDynamoEntity>(hashKey)
+                .GetRemainingAsync())
+                .FirstOrDefault();
+
+            return Mapper.Map<TEntity>(result);
+        }
+
+        private string GetGlobalIdentifierFromGuidId(Guid id) => $"{nameof(TDynamoEntity)}#{id}";
     }
 }
