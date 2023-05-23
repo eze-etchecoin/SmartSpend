@@ -1,5 +1,4 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
-using Amazon.DynamoDBv2.DocumentModel;
 using AutoMapper;
 using SmartSpend.Domain.Core.Entities;
 using SmartSpend.Domain.Core.Repository;
@@ -30,6 +29,16 @@ namespace SmartSpend.Persistence.DynamoDb.Repositories
             await _context.SaveAsync(dynamoEntity);
         }
 
+        public async Task Insert(IEnumerable<TEntity> entities)
+        {
+            var dynamoEntities = Mapper.Map<IEnumerable<TDynamoEntity>>(entities);
+
+            var batchWrite = _context.CreateBatchWrite<TDynamoEntity>();
+            batchWrite.AddPutItems(dynamoEntities);
+
+            await batchWrite.ExecuteAsync();
+        }
+
         public async Task Delete(TEntity entity)
         {
             var dynamoEntity = Mapper.Map<TDynamoEntity>(entity);
@@ -38,7 +47,13 @@ namespace SmartSpend.Persistence.DynamoDb.Repositories
 
         public async Task<IEnumerable<TEntity>> GetAll()
         {
-            throw new NotImplementedException();
+            var resultsDb = await _context
+                .QueryAsync<TDynamoEntity>(typeof(TDynamoEntity).Name)
+                .GetRemainingAsync();
+
+            var results = Mapper.Map<IEnumerable<TEntity>>(resultsDb);
+
+            return results;
         }
 
         public async Task Update(TEntity entity)
@@ -58,6 +73,6 @@ namespace SmartSpend.Persistence.DynamoDb.Repositories
             return Mapper.Map<TEntity>(result);
         }
 
-        private string GetGlobalIdentifierFromGuidId(Guid id) => $"{nameof(TDynamoEntity)}#{id}";
+        private string GetGlobalIdentifierFromGuidId(Guid id) => $"{typeof(TDynamoEntity).Name}#{id}";
     }
 }

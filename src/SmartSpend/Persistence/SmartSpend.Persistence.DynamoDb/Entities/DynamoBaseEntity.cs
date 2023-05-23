@@ -11,18 +11,19 @@ namespace SmartSpend.Persistence.DynamoDb.Entities
         public DynamoBaseEntity()
         {
             Id = Guid.NewGuid();
-            CreatedOn = DateTimeOffset.Now.ToString("u");
+            CreatedOn = DateTimeOffset.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffzzz");
         }
-
-        protected abstract string EntityName { get; }
 
         [DynamoDBHashKey]
+        protected abstract string EntityName { get; set; }
+
         public string GlobalIdentifier 
         { 
-            get => _globalIdentifier;
-            set => _globalIdentifier = $"{EntityName}#{Id}";
+            get => _globalIdentifier ?? $"{EntityName}#{Id}";
+            internal set => _globalIdentifier = value;
         }
 
+        [DynamoDBRangeKey]
         public string CreatedOn { get; internal set; }
 
         public Guid Id 
