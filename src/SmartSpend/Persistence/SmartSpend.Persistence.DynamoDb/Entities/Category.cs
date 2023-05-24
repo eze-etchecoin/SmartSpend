@@ -2,11 +2,13 @@
 {
     public class Category : DynamoBaseEntity
     {
+        private string _entityName;
+        
         public string Description { get; set; }
         protected override string EntityName 
         { 
             get => nameof(Category); 
-            set => throw new NotImplementedException();
+            set => _entityName = value;
         }
     }
 }

@@ -12,14 +12,10 @@ namespace SmartSpend.Persistence.DynamoDb.Repositories
             
         }
 
-        protected override void ConfigAutoMapper(out IMapper mapper)
+        protected override void ConfigRepositoryMapper(MapperConfigurationExpression mapperConfig)
         {
-            mapper = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Category, Domain.Model.Category>()
-                    .ReverseMap();
-
-            }).CreateMapper();
+            mapperConfig.CreateMap<Category, Domain.Model.Category>()
+                .ReverseMap();
         }
     }
 }

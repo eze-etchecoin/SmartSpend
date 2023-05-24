@@ -12,16 +12,26 @@ namespace SmartSpend.Persistence.DynamoDb.Repositories
     {
         protected readonly IMapper Mapper;
         private readonly DynamoDBContext _context;
-        //private const string _tableName = "SmartSpend_Data";
 
         public DynamoBaseRepository(DynamoDBContext context)
         {
             _context = context;
 
-            ConfigAutoMapper(out Mapper);
+            var mapperConfigurationExpression = new MapperConfigurationExpression();
+            mapperConfigurationExpression
+                .CreateMap<DateTimeOffset, string>()
+                .ConvertUsing(dto => dto.ToString("yyyy-MM-ddTHH:mm:ss.fffzzz"));
+
+            mapperConfigurationExpression
+                .CreateMap<string, DateTimeOffset>()
+                .ConvertUsing(str => DateTimeOffset.Parse(str));
+
+            ConfigRepositoryMapper(mapperConfigurationExpression);
+
+            Mapper = new MapperConfiguration(mapperConfigurationExpression).CreateMapper();
         }
 
-        protected abstract void ConfigAutoMapper(out IMapper mapper);
+        protected abstract void ConfigRepositoryMapper(MapperConfigurationExpression mapperConfig);
 
         public async Task Insert(TEntity entity)
         {
@@ -64,15 +74,17 @@ namespace SmartSpend.Persistence.DynamoDb.Repositories
 
         public async Task<TEntity> GetById(Guid id)
         {
-            var hashKey = GetGlobalIdentifierFromGuidId(id);
+            var hashKey = id.ToString();
+
             var result = (await _context
-                .QueryAsync<TDynamoEntity>(hashKey)
+                .QueryAsync<TDynamoEntity>(hashKey, new DynamoDBOperationConfig
+                {
+                    IndexName = "Id-index"
+                })
                 .GetRemainingAsync())
                 .FirstOrDefault();
 
             return Mapper.Map<TEntity>(result);
         }
-
-        private string GetGlobalIdentifierFromGuidId(Guid id) => $"{typeof(TDynamoEntity).Name}#{id}";
     }
 }
