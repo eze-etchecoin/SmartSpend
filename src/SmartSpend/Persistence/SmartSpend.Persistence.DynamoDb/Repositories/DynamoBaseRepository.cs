@@ -13,7 +13,7 @@ namespace SmartSpend.Persistence.DynamoDb.Repositories
         protected readonly IMapper Mapper;
         private readonly DynamoDBContext _context;
 
-        public DynamoBaseRepository(DynamoDBContext context)
+        public DynamoBaseRepository(SmartSpendDbContext context)
         {
             _context = context;
 
@@ -52,7 +52,10 @@ namespace SmartSpend.Persistence.DynamoDb.Repositories
         public async Task Delete(TEntity entity)
         {
             var dynamoEntity = Mapper.Map<TDynamoEntity>(entity);
-            await _context.DeleteAsync(dynamoEntity.GlobalIdentifier);
+            await _context.DeleteAsync(dynamoEntity.Id, new DynamoDBOperationConfig
+            {
+                IndexName = "Id-index"
+            });
         }
 
         public async Task<IEnumerable<TEntity>> GetAll()

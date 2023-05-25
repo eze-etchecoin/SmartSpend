@@ -1,0 +1,43 @@
+﻿@page "/categories"
+@using SmartSpend.Shared
+@inject HttpClient Http
+
+<PageTitle>Categories</PageTitle>
+
+<h1>Categories</h1>
+
+<p>List of available categories.</p>
+
+@if (categories == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in categories)
+            {
+                <tr>
+                    <td>@category.Id.ToString()</td>
+                    <td>@category.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private CategoryDTO[]? categories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        categories = await Http.GetFromJsonAsync<CategoryDTO[]>("Categories/GetAll");
+    }
+}

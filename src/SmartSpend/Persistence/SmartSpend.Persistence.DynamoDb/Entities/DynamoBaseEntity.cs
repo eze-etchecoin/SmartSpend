@@ -5,7 +5,7 @@ namespace SmartSpend.Persistence.DynamoDb.Entities
     [DynamoDBTable("SmartSpend_Data")]
     public abstract class DynamoBaseEntity
     {
-        private string _globalIdentifier;
+        private string _parentEntityKey;
 
         public DynamoBaseEntity()
         {
@@ -16,10 +16,12 @@ namespace SmartSpend.Persistence.DynamoDb.Entities
         [DynamoDBHashKey]
         protected abstract string EntityName { get; set; }
 
-        public string GlobalIdentifier 
+        protected abstract string ParentEntityName { get; set; }
+
+        public string ParentEntityKey
         { 
-            get => _globalIdentifier ?? $"{EntityName}#{Id}";
-            internal set => _globalIdentifier = value;
+            get => _parentEntityKey ?? $"{ParentEntityName}#{Id}";
+            internal set => _parentEntityKey = value;
         }
 
         [DynamoDBRangeKey]
