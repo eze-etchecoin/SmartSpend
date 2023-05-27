@@ -1,4 +1,5 @@
 ﻿@page "/categories"
+@using SmartSpend.Client.Shared.Controls
 @using SmartSpend.Shared
 @inject HttpClient Http
 
@@ -8,7 +9,7 @@
 
 <p>List of available categories.</p>
 
-<button type="button" class="btn btn-primary">Add new</button>
+@*<button type="button" class="btn btn-primary">Add new</button>*@
 
 @if (categories == null)
 {
@@ -16,6 +17,12 @@
 }
 else
 {
+    <div class="row">
+        <div class="col-4">
+            <AlertInfo>Example alert.</AlertInfo>
+        </div>
+    </div>
+
     <table class="table">
         <thead>
             <tr>

@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartSpend.Domain.Services"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C1605E65-0FB4-4665-8868-BDF68B0224EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartSpend.UnitTests", "SmartSpend\Tests\SmartSpend.UnitTests\SmartSpend.UnitTests.csproj", "{D3B7477B-9EAD-45ED-BCDC-8CE991D8C47F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartSpend.UnitTests", "SmartSpend\Tests\SmartSpend.UnitTests\SmartSpend.UnitTests.csproj", "{D3B7477B-9EAD-45ED-BCDC-8CE991D8C47F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
