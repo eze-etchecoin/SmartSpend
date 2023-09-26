@@ -1,0 +1,25 @@
+﻿@using SmartSpend.Shared;
+
+@if(CategoryDTO != null)
+{
+    <h3>Category | @CategoryDTO.Description</h3>
+}
+else
+{
+    <h3>New category</h3>
+}
+
+<form id="categoryForm">
+    <fieldset>
+    </fieldset>
+</form>
+
+
+@code {
+    public CategoryDTO CategoryDTO { get; set; }
+
+    public Category(CategoryDTO categoryDTO)
+    {
+        CategoryDTO = categoryDTO;
+    }
+}
